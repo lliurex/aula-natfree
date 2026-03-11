@@ -29,7 +29,7 @@ Las etiquetas de autoupgrade que deberan tener los equipos son:
 ## Funcionamiento del aula natfree
 ### Equipo del profesor (ADI)
  * El equipo estara conectado por cable de red.
- * Se crea la interfaz natfree00 mediante un Descripcionript de dispatcher.d del NetworkManager.
+ * Se crea la interfaz natfree00 mediante un script de dispatcher.d del NetworkManager.
  * El profesor tomara el control del aula mediante el controlador de carritos, indicando cual es el carrito que quiere controlar. 
 
  ![Controlador de carritos](./rsrc/controlador_carritos.png)
@@ -37,16 +37,20 @@ Las etiquetas de autoupgrade que deberan tener los equipos son:
  * Esto ejecutara natfree-adi configure X, donde X es el numero del carrito. 
    * En base a la configuracion del fichero /etc/natfree.d/ y buscando la variable NF_DEF_IP_NUMBER, obtendra la ip que ha de configurarse en la interfaz natfree00. Segun el carrito que este controlando sumara un offset a la ip de la red y se asignara dicha ip. En el caso de controlar el carrito 1 se le asignara la 15 ip partiendo desde la base. Ese es el valor por defecto, pero se puede cambiar con el valor NF_DEF_IP_NUMBER. El ultimo carrito correspondera a la primera ip usable de la red en la que esta.
    * Actualizara el /etc/hosts y la ip calculada de carrito resolvera "server"
-   * Configurara las variables CLASSROOM, SRV_IP, CLIENT_LDAP_URI y CLIENT_LDAP_URI_NOSSL
+   * Configurara las variables CLASSROOM, SRV_IP, CLIENT_LDAP_URI y CLIENT_LDAP_URI_NOSSL.
+      * CLASSROOM se configurara con el numero del carrito que se esta controlando.
+      * SRV_IP, CLIENT_LDAP_URI y CLIENT_LDAP_URI_NOSSL se configurara con la ip que se ha asignado a la interfaz
 ### Equipo del alumno (portatil)
   * El equipo inicialmente no estara conectado a ninguna red.
   * El equipo ha de haber sido registrado mediante la herramienta de registro de carrito "client register".
+
   ![Client register](./rsrc/client_register.png)
   * De forma habitual al inciar sesion se creara una conexion wifi mediante su usuario de identidad digital. Con usuarios locales no se creara la conexion wifi. Solo en el caso de usuario alumnat se conectara a la wifi XXX.
   * Durante la conexion tratara de obtener de la red el valor lliurex_vlan para conocer cual es la ip base de la red vlan40. De conseguirlo, creara la variable n4d LLIUREX_VLAN con dicho valor.
   * Se lanza el demonio sync-on-server-ready el cual estara comprobando si el servidor "server" responde.
      * Cuando server responda, ejecutara todo lo que exista en el directorio /usr/share/sync-on-server-ready/actions, entre los que se encuentra volver a disparar aquellos startups de n4d que tengan en su clase la variable NATFREE_STARTUP = True.
      ![Startup n4d natfree](./rsrc/startup_natfree.png)
+     * Sync-on-server-ready solo se ejecutara cuando haya un cambio de ip. Si se conecta y desconecta por perdida de ip o de red no se ejecutara mas veces.
   * Se configura y recarga el servicio de monit para que este vigilando la ip que haya calculado que sera su servidor. Para este calculo se basara en los siguientes parametros:
     * Tengo la variable de n4d LLIUREX_VLAN con la ip base de la vlan40. Entonces utilizo esa ip base y le sumo un offset segun el carrito que soy basado en la variable NF_DEF_IP_NUMBER.
     * No he cumplido el caso anterior. Entonces busco la ip que he obtenido en la interfaz que se ha levantado con ip, obtengo la ip de la red a la que pertenezco y le sumo un offset segun el carrito que soy basado en la variable NF_DEF_IP_NUMBER.

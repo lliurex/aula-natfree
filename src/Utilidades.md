@@ -12,3 +12,7 @@ El registrador de carrito permite registrar el equipo en un carrito concreto. So
 ![controlador de carritos](./rsrc/controlador_carritos.png)
 
 Utilidad para controlar un carrito. El comando que ejecuta por debajo es natfree-adi configure/unconfigure X , donde X es el numero del carrito a controlar. Se apoya en la variable CLASSROOM para saber que aula esta controlando.
+
+## Linea de comandos
+### nfctl 
+Utilidad de linea de comandos que actualmente se usa para obtener informacion del entorno natfree. Puedes obtener las variables internas de natfree o valores calculados como la ip de red de aula natfree ( util para cluster-ssh ) 

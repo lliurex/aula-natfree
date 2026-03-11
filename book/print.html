@@ -36,10 +36,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-fe0c5da8.js";
+            window.path_to_searchindex_js = "searchindex-b718b4d5.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-62a5d069.js"></script>
+        <script src="toc-786be761.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -219,7 +219,7 @@
 <h3 id="equipo-del-profesor-adi"><a class="header" href="#equipo-del-profesor-adi">Equipo del profesor (ADI)</a></h3>
 <ul>
 <li>El equipo estara conectado por cable de red.</li>
-<li>Se crea la interfaz natfree00 mediante un Descripcionript de dispatcher.d del NetworkManager.</li>
+<li>Se crea la interfaz natfree00 mediante un script de dispatcher.d del NetworkManager.</li>
 <li>El profesor tomara el control del aula mediante el controlador de carritos, indicando cual es el carrito que quiere controlar.</li>
 </ul>
 <p><img src="rsrc/controlador_carritos.png" alt="Controlador de carritos"></p>
@@ -228,21 +228,29 @@
 <ul>
 <li>En base a la configuracion del fichero /etc/natfree.d/ y buscando la variable NF_DEF_IP_NUMBER, obtendra la ip que ha de configurarse en la interfaz natfree00. Segun el carrito que este controlando sumara un offset a la ip de la red y se asignara dicha ip. En el caso de controlar el carrito 1 se le asignara la 15 ip partiendo desde la base. Ese es el valor por defecto, pero se puede cambiar con el valor NF_DEF_IP_NUMBER. El ultimo carrito correspondera a la primera ip usable de la red en la que esta.</li>
 <li>Actualizara el /etc/hosts y la ip calculada de carrito resolvera “server”</li>
-<li>Configurara las variables CLASSROOM, SRV_IP, CLIENT_LDAP_URI y CLIENT_LDAP_URI_NOSSL</li>
+<li>Configurara las variables CLASSROOM, SRV_IP, CLIENT_LDAP_URI y CLIENT_LDAP_URI_NOSSL.
+<ul>
+<li>CLASSROOM se configurara con el numero del carrito que se esta controlando.</li>
+<li>SRV_IP, CLIENT_LDAP_URI y CLIENT_LDAP_URI_NOSSL se configurara con la ip que se ha asignado a la interfaz</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 <h3 id="equipo-del-alumno-portatil"><a class="header" href="#equipo-del-alumno-portatil">Equipo del alumno (portatil)</a></h3>
 <ul>
 <li>El equipo inicialmente no estara conectado a ninguna red.</li>
-<li>El equipo ha de haber sido registrado mediante la herramienta de registro de carrito “client register”.
-<img src="rsrc/client_register.png" alt="Client register"></li>
+<li>El equipo ha de haber sido registrado mediante la herramienta de registro de carrito “client register”.</li>
+</ul>
+<p><img src="rsrc/client_register.png" alt="Client register"></p>
+<ul>
 <li>De forma habitual al inciar sesion se creara una conexion wifi mediante su usuario de identidad digital. Con usuarios locales no se creara la conexion wifi. Solo en el caso de usuario alumnat se conectara a la wifi XXX.</li>
 <li>Durante la conexion tratara de obtener de la red el valor lliurex_vlan para conocer cual es la ip base de la red vlan40. De conseguirlo, creara la variable n4d LLIUREX_VLAN con dicho valor.</li>
 <li>Se lanza el demonio sync-on-server-ready el cual estara comprobando si el servidor “server” responde.
 <ul>
 <li>Cuando server responda, ejecutara todo lo que exista en el directorio /usr/share/sync-on-server-ready/actions, entre los que se encuentra volver a disparar aquellos startups de n4d que tengan en su clase la variable NATFREE_STARTUP = True.
 <img src="rsrc/startup_natfree.png" alt="Startup n4d natfree"></li>
+<li>Sync-on-server-ready solo se ejecutara cuando haya un cambio de ip. Si se conecta y desconecta por perdida de ip o de red no se ejecutara mas veces.</li>
 </ul>
 </li>
 <li>Se configura y recarga el servicio de monit para que este vigilando la ip que haya calculado que sera su servidor. Para este calculo se basara en los siguientes parametros:
@@ -311,6 +319,14 @@
 <h2 id="controlador-de-carritos"><a class="header" href="#controlador-de-carritos">Controlador de carritos</a></h2>
 <p><img src="rsrc/controlador_carritos.png" alt="controlador de carritos"></p>
 <p>Utilidad para controlar un carrito. El comando que ejecuta por debajo es natfree-adi configure/unconfigure X , donde X es el numero del carrito a controlar. Se apoya en la variable CLASSROOM para saber que aula esta controlando.</p>
+<h2 id="linea-de-comandos"><a class="header" href="#linea-de-comandos">Linea de comandos</a></h2>
+<h3 id="nfctl"><a class="header" href="#nfctl">nfctl</a></h3>
+<p>Utilidad de linea de comandos que actualmente se usa para obtener informacion del entorno natfree. Puedes obtener las variables internas de natfree o valores calculados como la ip de red de aula natfree ( util para cluster-ssh )</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="faq"><a class="header" href="#faq">FAQ</a></h1>
+<h2 id="al-tratar-de-conectar-un-carrito-me-dice-que-el-carrito-ya-esta-siendo-controlado"><a class="header" href="#al-tratar-de-conectar-un-carrito-me-dice-que-el-carrito-ya-esta-siendo-controlado">Al tratar de conectar un carrito me dice que el carrito ya esta siendo controlado</a></h2>
+<p>Esto se debe a que alguien tiene asignada la ip del carrito que estas tratando de controlar. Puedes consultar la ip de un carrito desde nfctl.</p>
+<p>De forma automatica los carritos son liberados al cabo de cierto tiempo a no ser que un usuario cancele esa liberacion. Este valor puede ser modificado al escribir en el fichero /etc/classroom-plasmoid.cfg los minutos a los que debe realizar la desconexion.</p>
 
                     </main>
 

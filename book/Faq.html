@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Utilidades - Modelo Natfree</title>
+        <title>FAQ - Modelo Natfree</title>
 
 
         <!-- Custom HTML head -->
@@ -174,31 +174,19 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="utilidades"><a class="header" href="#utilidades">Utilidades</a></h1>
-<h2 id="indicador-de-carrito-y-estado"><a class="header" href="#indicador-de-carrito-y-estado">Indicador de carrito y estado</a></h2>
-<p><img src="./rsrc/indicador_carrito.png" alt="indicador de carrito"></p>
-<p>El indicador de carrito indica a que carrito perteneces y el estado de conexion con el servidor. Se puede presionar el boton de comprobar el estado del servidor para forzar una comprobacion inmediata. Tambien se puede presionar el boton de cambiar el carrito para cambiar el carrito al que se pertenece. Esta ultima opcion lanzara la utilidad de registrador de carrito.</p>
-<h2 id="registrador-de-carrito"><a class="header" href="#registrador-de-carrito">Registrador de carrito</a></h2>
-<p><img src="./rsrc/registrador_carrito.png" alt="registrador de carrito"></p>
-<p>El registrador de carrito permite registrar el equipo en un carrito concreto. Solo permite alcanzar un numero maximo de carrito definido por la variable NF_DEF_IP_NUMBER.</p>
-<h2 id="controlador-de-carritos"><a class="header" href="#controlador-de-carritos">Controlador de carritos</a></h2>
-<p><img src="./rsrc/controlador_carritos.png" alt="controlador de carritos"></p>
-<p>Utilidad para controlar un carrito. El comando que ejecuta por debajo es natfree-adi configure/unconfigure X , donde X es el numero del carrito a controlar. Se apoya en la variable CLASSROOM para saber que aula esta controlando.</p>
-<h2 id="linea-de-comandos"><a class="header" href="#linea-de-comandos">Linea de comandos</a></h2>
-<h3 id="nfctl"><a class="header" href="#nfctl">nfctl</a></h3>
-<p>Utilidad de linea de comandos que actualmente se usa para obtener informacion del entorno natfree. Puedes obtener las variables internas de natfree o valores calculados como la ip de red de aula natfree ( util para cluster-ssh )</p>
+                        <h1 id="faq"><a class="header" href="#faq">FAQ</a></h1>
+<h2 id="al-tratar-de-conectar-un-carrito-me-dice-que-el-carrito-ya-esta-siendo-controlado"><a class="header" href="#al-tratar-de-conectar-un-carrito-me-dice-que-el-carrito-ya-esta-siendo-controlado">Al tratar de conectar un carrito me dice que el carrito ya esta siendo controlado</a></h2>
+<p>Esto se debe a que alguien tiene asignada la ip del carrito que estas tratando de controlar. Puedes consultar la ip de un carrito desde nfctl.</p>
+<p>De forma automatica los carritos son liberados al cabo de cierto tiempo a no ser que un usuario cancele esa liberacion. Este valor puede ser modificado al escribir en el fichero /etc/classroom-plasmoid.cfg los minutos a los que debe realizar la desconexion.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="Aula-provisional-externa.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="Utilidades.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                             </a>
 
-                            <a rel="next prefetch" href="Faq.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
-                            </a>
 
                         <div style="clear: both"></div>
                     </nav>
@@ -206,13 +194,10 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="Aula-provisional-externa.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="Utilidades.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                     </a>
 
-                    <a rel="next prefetch" href="Faq.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
-                    </a>
             </nav>
 
         </div>
